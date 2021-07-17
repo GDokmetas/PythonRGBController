@@ -27,7 +27,7 @@ layout =[ [sg.Text("Port Seçiniz:"), sg.Combo(serial_ports(), size=(10,1)),
             sg.Text("Baud Seçiniz:"), sg.Combo(["110","300","600","1200", "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200", "128000", "256000"], default_value=9600), 
             sg.Button(button_text="Bağlan", key="-BAGLAN-", size=(10,1)) ],
             [sg.Text("", size=(10,1), key="-BAGLANDI_TEXT-")],
-            [sg.Text("Kırmızı:"), sg.Slider(range=(0,255), default_value=0, resolution=1, key="kirmizi"), sg.Text("Yeşil:"), sg.Slider(range=(0,255), default_value=0, resolution=1, key="yesil"), 
+            [sg.Text("Parlaklik:"), sg.Slider(range=(0,8), default_value=8, resolution=1, key="parlaklik"), sg.Text("Kırmızı:"), sg.Slider(range=(0,255), default_value=0, resolution=1, key="kirmizi"), sg.Text("Yeşil:"), sg.Slider(range=(0,255), default_value=0, resolution=1, key="yesil"), 
             sg.Text("Mavi:"), sg.Slider(range=(0,255), default_value=0, resolution=1, key="mavi"), sg.Button(button_text="AYARLA", key="ayarla") ]
         ]
 
@@ -48,10 +48,12 @@ while True:
         kirmizi = int(value['kirmizi'])
         yesil = int(value['yesil'])
         mavi = int(value['mavi'])
+        parlaklik = int(value['parlaklik'])
         kirmizi = format(kirmizi, "03d") 
         yesil = format(yesil, "03d") 
         mavi = format(mavi, "03d") 
-        veri = kirmizi + yesil + mavi 
+        parlaklik = format(parlaklik, "01d")
+        veri = kirmizi + yesil + mavi + parlaklik
         print(veri)
         ser.write(veri.encode('Ascii'))
    
